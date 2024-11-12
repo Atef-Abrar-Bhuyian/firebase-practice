@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
 
-    const handleSignUp = e =>{
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        const name = e.target.name.value;
-        console.log(email, password, name);
-    }
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const name = e.target.name.value;
+    console.log(email, password, name);
 
+    // create User
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log("ERROR", error);
+      });
+  };
 
   return (
     <div className="hero bg-base-200">
@@ -20,8 +30,7 @@ const SignUp = () => {
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <form onSubmit={handleSignUp} className="card-body">
-
-          <div className="form-control">
+            <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
@@ -33,7 +42,6 @@ const SignUp = () => {
                 required
               />
             </div>
-
 
             <div className="form-control">
               <label className="label">
@@ -47,7 +55,7 @@ const SignUp = () => {
                 required
               />
             </div>
-            
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
