@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
-  const {loginUser} = useContext(AuthContext);
+  const location = useNavigate();
+  const { loginUser, googleSignIn } = useContext(AuthContext);
+
+  // Login Form Handle btn
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -12,13 +16,26 @@ const Login = () => {
 
     // User Login
     loginUser(email, password)
-    .then(result =>{
-      console.log(result.user);
-    })
-    .catch(error =>{
-      console.log("ERROR", error.message);
-    })
+      .then((result) => {
+        console.log(result.user);
+        e.target.reset();
+        location("/order");
+      })
+      .catch((error) => {
+        console.log("ERROR", error.message);
+      });
+  };
 
+  // Google Btn Handle
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        location("/profile");
+      })
+      .catch((error) => {
+        console.log("Error", error.message);
+      });
   };
 
   return (
@@ -62,6 +79,15 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <div className="mb-6 mt-0 text-center flex items-center flex-col gap-2">
+            <p>Or Continue With</p>
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn btn-ghost border-white"
+            >
+              <FaGoogle />
+            </button>
+          </div>
 
           <p className="text-center mb-4">
             New To This Website? Please{" "}

@@ -26,9 +26,16 @@ const handleSignOut = ()=>{
       <li>
         <NavLink to="/signup">Sign Up</NavLink>
       </li>
-      <li>
+      {
+        user && <><li>
         <NavLink to="/order">Orders</NavLink>
-      </li>
+      </li></>
+      }
+      {
+        user && <><li>
+        <NavLink to="/profile">Profile</NavLink>
+      </li></>
+      }
     </>
   );
   return (
@@ -68,7 +75,7 @@ const handleSignOut = ()=>{
         user ? 
         
         <>
-            <span>{user.email}</span>
+            <span>Hi! {user.displayName}</span>
             <a onClick={handleSignOut} className="btn">Sign Out</a>
         </>
         
