@@ -1,0 +1,16 @@
+# Auto-detect text files and normalize their line endings
+* text=auto
+
+# Explicitly declare text files you want to always normalize
+*.c text
+*.h text
+
+# Declare files that will always have CRLF line endings on checkout
+*.bat eol=crlf
+
+# Declare files that will always have LF line endings on checkout
+*.sh eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
