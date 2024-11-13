@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
-import { FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const Login = () => {
   const location = useNavigate();
-  const { loginUser, googleSignIn } = useContext(AuthContext);
+  const { loginUser, googleSignIn,githubSignIn } = useContext(AuthContext);
 
   // Login Form Handle btn
   const handleLogin = (e) => {
@@ -35,6 +35,18 @@ const Login = () => {
       })
       .catch((error) => {
         console.log("Error", error.message);
+      });
+  };
+
+  // Github btn Handle
+  const handleGithubSignIn = () => {
+    githubSignIn()
+      .then((result) => {
+        console.log("Current User:", result.user);
+        location("/profile");
+      })
+      .catch((error) => {
+        console.log("ERROR: ", error);
       });
   };
 
@@ -81,12 +93,20 @@ const Login = () => {
           </form>
           <div className="mb-6 mt-0 text-center flex items-center flex-col gap-2">
             <p>Or Continue With</p>
-            <button
-              onClick={handleGoogleSignIn}
-              className="btn btn-ghost border-white"
-            >
-              <FaGoogle />
-            </button>
+            <div className="flex gap-4">
+              <button
+                onClick={handleGoogleSignIn}
+                className="btn btn-ghost border-white"
+              >
+                <FaGoogle />
+              </button>
+              <button
+                onClick={handleGithubSignIn}
+                className="btn btn-ghost border-white"
+              >
+                <FaGithub />
+              </button>
+            </div>
           </div>
 
           <p className="text-center mb-4">
