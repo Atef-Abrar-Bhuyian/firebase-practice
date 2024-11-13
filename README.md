@@ -1,8 +1,12 @@
-# React + Vite
+# Firebase Login Example
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates a simple login system using Firebase Authentication. The live version of this project is available at [firebase-login.surge.sh](http://firebase-login.surge.sh).
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User Authentication with Firebase
+- Login with Email and Password
+- Login with Google
+- Login with Github
+- Responsive Design
+- Hosted on Surge
